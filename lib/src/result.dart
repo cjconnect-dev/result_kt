@@ -62,10 +62,12 @@ class Result<T> {
   /// if it is [success][Result.isSuccess].
   Failure? failureOrNull() => isFailure ? _value! as Failure : null;
 
+  Object? exceptionOrNull() => failureOrNull()?.error;
+
   /// Returns the encapsulated value if this instance represents
   /// [success][Result.isSuccess] or throws the encapsulated in [Failure]
   /// exception if it is [failure][Result.isFailure].
-  T? getOrThrow() =>
+  T getOrThrow() =>
       // ignore: only_throw_errors
       isFailure ? throw (_value! as Failure).error : _value as T;
 
